@@ -13,8 +13,8 @@ function findAllConfig(key) {
   const fileMaps = {};
   utils.findFiles(path.resolve(baseDir, './config')).forEach(fp => {
     const result = astUtil.findConfig(fs.readFileSync(fp).toString(), key);
-    if (result.node) {
-      result.text = recast.print(result.node).code;
+    if (result) {
+      result.text = recast.print(result).code;
       fileMaps[fp] = result;
     }
   });
@@ -52,13 +52,13 @@ describe('test/findConfig.test.js', () => {
     let result = findAllConfig('keys');
     const list = Object.keys(result);
 
-    assert(result[list[0]].node.loc.start.line === 7);
+    assert(result[list[0]].loc.start.line === 7);
     assert(list.includes(path.resolve(__dirname, './fixtures/app1/config/config.default.js')));
     assert(!list.includes(path.resolve(__dirname, './fixtures/app1/config/config.local.js')));
     assert(!list.includes(path.resolve(__dirname, './fixtures/app1/config/config.prod.js')));
     assert(!list.includes(path.resolve(__dirname, './fixtures/app1/config/config.unittest.js')));
 
     result = findAllConfig('view.defaultViewEngine');
-    assert(result[list[0]].node.loc.start.line === 11);
+    assert(result[list[0]].loc.start.line === 11);
   });
 });
