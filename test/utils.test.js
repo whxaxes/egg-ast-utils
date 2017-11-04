@@ -5,7 +5,7 @@ const path = require('path');
 const assert = require('assert');
 const j = require('jscodeshift');
 
-describe('test/index.test.js', () => {
+describe('test/utils.test.js', () => {
   it('#findFiles', () => {
     const list = utils.findFiles(path.resolve(__dirname, './fixtures/app1/config/'));
     assert(list.includes(path.resolve(__dirname, './fixtures/app1/config/config.default.js')));
