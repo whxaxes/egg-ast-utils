@@ -21,12 +21,12 @@ function findAllConfig(key) {
   return fileMaps;
 }
 
-describe('test/index.test.js', () => {
+describe('test/findConfig.test.js', () => {
   it('should work correctly', () => {
     const result = findAllConfig('view.mapping[".nj"]');
     const list = Object.keys(result);
     list.forEach(item => {
-      assert(result[item].text === '\'.nj\'');
+      assert(result[item].text === '\'.nj\': \'nunjucks\'');
     });
 
     assert(list.includes(path.resolve(__dirname, './fixtures/app1/config/config.default.js')));
