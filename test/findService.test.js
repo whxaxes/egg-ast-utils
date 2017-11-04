@@ -3,9 +3,7 @@
 const AstUtils = require('../');
 const path = require('path');
 const assert = require('assert');
-const utils = require('../lib/utils');
 const fs = require('fs');
-const recast = require('recast');
 const baseDir = path.resolve(__dirname, './fixtures/app1');
 const astUtil = new AstUtils();
 
