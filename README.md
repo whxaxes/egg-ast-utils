@@ -29,8 +29,11 @@ const astUtil = require('egg-ast-utils');
 const result = astUtil.parseNormal(fs.readFileSync('config.default.js').toString());
 
 console.log(result);
-// { nodes: [ ... ], children: { ... } }
+// { nodes: [ { Assignment } ], children: { ... } }
 
 console.log(result.get('view.defaultViewEngine'))
-// { nodes: [ ... ] }
+// { nodes: [ { Identify } ] }
+
+console.log(result.get('security.csrf'))
+// { nodes: [ { Identify } ] }
 ```
