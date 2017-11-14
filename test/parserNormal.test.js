@@ -52,7 +52,8 @@ describe('test/parserNormal.test.js', () => {
     let url = path.resolve(baseDir, './config/config.default.js');
     let result = parser(fs.readFileSync(url).toString());
     matchNode(url, result);
-    assert(result.children.view.children.mapping.children['.nj'].nodes.length === 2);
+    assert(result.get('view.mapping[".nj"]').nodes.length === 2);
+    assert(Object.keys(result.get('view').children).length === 2);
 
     url = path.resolve(baseDir, './config/config.local.js');
     result = parser(fs.readFileSync(url).toString());
