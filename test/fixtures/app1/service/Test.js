@@ -10,6 +10,14 @@ module.exports = app => {
       super(ctx);
     }
 
+    get bbb() {
+      return 'bbb';
+    }
+
+    set bbb(val) {
+      
+    }
+
     /**
      * 获取账号信息
      *

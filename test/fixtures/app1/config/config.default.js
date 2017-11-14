@@ -19,6 +19,8 @@ module.exports = appInfo => {
     },
   };
 
+  config.view.mapping['.nj'] = '111';
+
   config.static = {
     maxAge: 200000,
   };
