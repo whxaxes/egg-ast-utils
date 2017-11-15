@@ -4,6 +4,8 @@
 
 ### parseNormal
 
+file
+
 ```js
 // config.default.js
 module.exports = appInfo => {
@@ -23,8 +25,9 @@ module.exports = appInfo => {
 };
 ```
 
+parse
+
 ```js
-// parse
 const astUtil = require('egg-ast-utils');
 const result = astUtil.parseNormal(fs.readFileSync('config.default.js').toString());
 
@@ -37,3 +40,56 @@ console.log(result.get('view.defaultViewEngine'))
 console.log(result.get('security.csrf'))
 // { nodes: [ { Identify } ] }
 ```
+
+### parseUnittest
+
+file
+
+```js
+// test/util.test.js
+describe('lib#utils#utils.js', () => {
+  before(function* b() {
+    ...
+  });
+
+  it('forEach should run without error', () => {
+    ...
+  });
+
+  describe('sub describe 2', function() {
+  	it('should throw friendly error', () => {
+      ...
+    });
+  
+    it('should throw error correctly without el', () => {
+      ...
+    });
+  
+    it('should run without error if no el', (done) => {
+      ...
+    });
+  });
+});
+```
+
+parse
+
+```js
+const astUtil = require('egg-ast-utils');
+const list = astUtil.parseUnittest(fs.readFileSync('test/util.test.js').toString());
+
+console.log(list);
+// [
+//   { 
+//     node: { CallExpression },
+//     type: 'describe',
+//     describe: 'lib#utils#utils.js', 
+//     children: [
+//       { node: { CallExpression }, type: 'before' },
+//       { node: { CallExpression }, type: 'it', describe: 'forEach should run without error' },
+//       { node: { CallExpression }, type: 'describe', describe: 'sub describe 2', children: [ ... ] },
+//     ]
+//   }
+// ]
+```
+
