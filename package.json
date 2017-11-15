@@ -30,6 +30,9 @@
   "ci": {
     "version": "6, 8"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
     "url": ""
