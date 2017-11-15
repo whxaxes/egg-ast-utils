@@ -5,7 +5,7 @@ const fs = require('fs');
 const assert = require('assert');
 const _ = require('lodash');
 const debug = require('debug')('egg-ast-utils');
-const parser = require('../lib/parser/parseNormal');
+const utils = require('../');
 const baseDir = path.resolve(__dirname, './fixtures/app1');
 
 class MockService {}
@@ -47,38 +47,42 @@ function matchNode(url, checkObj) {
   }
 }
 
-describe('test/parserNormal.test.js', () => {
+describe('test/parseNormal.test.js', () => {
   it('should work correctly with config', () => {
     let url = path.resolve(baseDir, './config/config.default.js');
-    let result = parser(fs.readFileSync(url).toString());
+    let result = utils.parseNormal(fs.readFileSync(url).toString());
     matchNode(url, result);
     assert(result.get('view.mapping[".nj"]').nodes.length === 2);
     assert(Object.keys(result.get('view').children).length === 2);
 
     url = path.resolve(baseDir, './config/config.local.js');
-    result = parser(fs.readFileSync(url).toString());
+    result = utils.parseNormal(fs.readFileSync(url).toString());
     matchNode(url, result);
 
     url = path.resolve(baseDir, './config/config.prod.js');
-    result = parser(fs.readFileSync(url).toString());
+    result = utils.parseNormal(fs.readFileSync(url).toString());
     matchNode(url, result);
 
     url = path.resolve(baseDir, './config/config.unittest.js');
-    result = parser(fs.readFileSync(url).toString());
+    result = utils.parseNormal(fs.readFileSync(url).toString());
     matchNode(url, result);
   });
 
   it('should work correctly with classes', () => {
     let url = path.resolve(baseDir, './service/Test.js');
-    let result = parser(fs.readFileSync(url).toString());
+    let result = utils.parseNormal(fs.readFileSync(url).toString());
     matchNode(url, result);
 
     url = path.resolve(baseDir, './service/Test2.js');
-    result = parser(fs.readFileSync(url).toString());
+    result = utils.parseNormal(fs.readFileSync(url).toString());
     matchNode(url, result);
 
     url = path.resolve(baseDir, './service/Test3.js');
-    result = parser(fs.readFileSync(url).toString());
+    result = utils.parseNormal(fs.readFileSync(url).toString());
     matchNode(url, result);
+
+    url = path.resolve(baseDir, './service/Test4.js');
+    result = utils.parseNormal(fs.readFileSync(url).toString());
+    assert(!result);
   });
 });
