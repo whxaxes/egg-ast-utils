@@ -1,6 +1,25 @@
 # egg-ast-utils
 
-## methods
+[![NPM version][npm-image]][npm-url]
+[![Build Status][travis-image]][travis-url]
+[![Appveyor status][appveyor-image]][appveyor-url]
+[![Coverage Status][coveralls-image]][coveralls-url]
+
+
+
+## Install
+
+```terminal
+npm install node-mus --save
+```
+
+Or 
+
+```terminal
+yarn add node-mus --save
+```
+
+## Methods
 
 ### parseNormal
 
@@ -93,3 +112,18 @@ console.log(list);
 // ]
 ```
 
+## Author
+
+wanghx
+
+## License
+MIT
+
+[npm-url]: https://npmjs.org/package/egg-ast-utils
+[npm-image]: http://img.shields.io/npm/v/egg-ast-utils.svg
+[travis-url]: https://travis-ci.org/whxaxes/egg-ast-utils
+[travis-image]: http://img.shields.io/travis/whxaxes/egg-ast-utils.svg
+[appveyor-url]: https://ci.appveyor.com/project/whxaxes/egg-ast-utils/branch/master
+[appveyor-image]: https://ci.appveyor.com/api/projects/status/github/whxaxes/egg-ast-utils?branch=master&svg=true
+[coveralls-url]: https://coveralls.io/r/whxaxes/egg-ast-utils
+[coveralls-image]: https://img.shields.io/coveralls/whxaxes/egg-ast-utils.svg
