@@ -10,13 +10,13 @@
 ## Install
 
 ```terminal
-npm install node-mus --save
+npm install egg-ast-utils --save
 ```
 
 Or 
 
 ```terminal
-yarn add node-mus --save
+yarn add egg-ast-utils --save
 ```
 
 ## Methods
