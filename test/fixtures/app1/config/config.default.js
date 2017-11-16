@@ -21,8 +21,21 @@ module.exports = appInfo => {
 
   config.view.mapping['.nj'] = '111';
 
+  config.view = {
+    bbc: {
+      
+    }
+  }
+
   config.static = {
     maxAge: 200000,
+  };
+
+  config.static = {
+    other: 20000,
+    maxAge: {
+      aaa: '123'
+    },
   };
 
   config.security = {
