@@ -21,7 +21,7 @@ yarn add egg-ast-utils --save
 
 ## Methods
 
-### parseNormal
+### parseConfig
 
 file
 
@@ -40,6 +40,8 @@ module.exports = appInfo => {
     csrf: false,
   };
 
+  config.security.csrf = true;
+
   return config;
 };
 ```
@@ -48,16 +50,81 @@ parse
 
 ```js
 const astUtil = require('egg-ast-utils');
-const result = astUtil.parseNormal(fs.readFileSync('config.default.js').toString());
+const result = astUtil.parseConfig(fs.readFileSync('config.default.js').toString());
 
-console.log(result);
-// { nodes: [ { Assignment } ], children: { ... } }
+console.log(result.find('view'))
+// [
+//   { 
+//     key: { Identify },   // view
+//     value: { ObjectExpression },
+//     children: {
+//       defaultViewEngine: [{
+//         key: { Identify },  // defaultViewEngine
+//         value: { Literal }, // nunjucks
+//       }]
+//     }
+//   }
+// ]
 
-console.log(result.get('view.defaultViewEngine'))
-// { nodes: [ { Identify } ] }
+console.log(result.find('view.defaultViewEngine'))
+// [
+//   { 
+//     key: { Identify },  // defaultViewEngine
+//     value: { Literal } // nunjucks
+//   }
+// ]
 
-console.log(result.get('security.csrf'))
-// { nodes: [ { Identify } ] }
+console.log(result.find('security.csrf'))
+// [
+//   { 
+//     key: { Identify },  // csrf
+//     value: { Identify }  // false
+//   },
+//   { 
+//     key: { Identify },  // csrf
+//     value: { Identify }  // true
+//   }
+// ]
+```
+
+### parseClass
+
+file
+
+```js
+// Test.js
+module.exports = app => {
+  return class Test extends app.Service {
+    constructor(ctx) {
+      super(ctx);
+    }
+
+    userInfo(page) {
+      return this.ctx.httpClient.request('xxxx');
+    }
+
+    'user.search'(data, page) {
+      return this.ctx.httpClient.request('xxxx');
+    }
+  }
+};
+```
+
+parse
+
+```js
+const astUtil = require('egg-ast-utils');
+const result = astUtil.parseClass(fs.readFileSync('Test.js').toString());
+
+console.log(result.find('userInfo'))
+// [
+//   { key: { Identify }, value: { FunctionExpression } }
+// ]
+
+console.log(result.find('"user.search"'))
+// [
+//   { key: { Identify }, value: { FunctionExpression } }
+// ]
 ```
 
 ### parseUnittest
