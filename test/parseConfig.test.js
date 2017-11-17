@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs');
 const assert = require('assert');
 const utils = require('../');
+const j = require('jscodeshift');
 const getValue = require('../lib/utils').getValue;
 const baseDir = path.resolve(__dirname, './fixtures/app1');
 
@@ -19,6 +20,8 @@ describe('test/parseNormal.test.js', () => {
     assert(getValue(result.find('static.maxAge.aaa')[0].value) === '123');
     assert(getValue(result.find('view.mapping[".nj"]')[0].value) === 'nunjucks');
     assert(getValue(result.find('view.mapping[".nj"]')[1].value) === '111');
+    assert(j(result.find('static.maxAge')[0].node).toSource() === 'maxAge: 200000');
+    assert(j(result.find('view.mapping')[0].node).toSource().includes('nunjucks\','));
 
     url = path.resolve(baseDir, './config/config.local.js');
     result = utils.parseConfig(fs.readFileSync(url).toString());
