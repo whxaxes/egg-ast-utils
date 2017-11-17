@@ -41,10 +41,12 @@ describe('test/utils.test.js', () => {
   });
 
   it('#extractKeyword', () => {
-    const str = '  this.config = app.config.view.mapping[ \'.nj\' ] + app.config.view.test[\'a.word.c\'].abc + app.config.view.test[\'a.word.c\'] + ctx.proxy.game[\'domain.method\'].echo();';
+    const str = '  this.config = app.config.view.mapping[ \'.nj\' ] + app.config.view.test[\'a.word.c\'].abc + app.config.view.test[ \'a.word.c\' ].bbc + ctx.proxy.game[\'domain.method\'].echo();';
     assert(utils.extractKeyword(str, 62) === 'app.config.view');
     assert(utils.extractKeyword(str, 62, 'app') === 'config.view');
     assert(utils.extractKeyword(str, 75, 'app') === 'config.view.test[\'a.word.c\']');
     assert(utils.extractKeyword(str, 75, 'config') === 'view.test[\'a.word.c\']');
+    assert(utils.extractKeyword(str, 116, 'config') === 'view.test[ \'a.word.c\' ]');
+    assert(utils.extractKeyword(str, str.indexOf('.nj'), 'config') === 'view.mapping[ \'.nj\' ]');
   });
 });
