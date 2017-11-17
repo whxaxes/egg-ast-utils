@@ -7,3 +7,6 @@ const parserDir = path.resolve(__dirname, './lib/parser');
 utils.findFiles(parserDir).forEach(fp => {
   exports[path.basename(fp, '.js')] = require(fp);
 });
+
+exports.extractKeyword = utils.extractKeyword;
+exports.parseExpression = utils.parseExpression;

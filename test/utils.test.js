@@ -32,5 +32,19 @@ describe('test/utils.test.js', () => {
     assert(list[2].name === 'aa');
     assert(list[3].value === 11);
     assert(j.Literal.check(list[3]));
+
+    list = utils.parseExpression('abc');
+    assert(list[0].name === 'abc');
+
+    list = utils.parseExpression('"abc"');
+    assert(list[0].value === 'abc');
+  });
+
+  it('#extractKeyword', () => {
+    const str = '  this.config = app.config.view.mapping[ \'.nj\' ] + app.config.view.test[\'a.word.c\'].abc + app.config.view.test[\'a.word.c\'] + ctx.proxy.game[\'domain.method\'].echo();';
+    assert(utils.extractKeyword(str, 62) === 'app.config.view');
+    assert(utils.extractKeyword(str, 62, 'app') === 'config.view');
+    assert(utils.extractKeyword(str, 75, 'app') === 'config.view.test[\'a.word.c\']');
+    assert(utils.extractKeyword(str, 75, 'config') === 'view.test[\'a.word.c\']');
   });
 });
