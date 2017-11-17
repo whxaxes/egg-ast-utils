@@ -1,6 +1,6 @@
 {
   "name": "egg-ast-utils",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "",
   "dependencies": {
     "debug": "^3.1.0",
