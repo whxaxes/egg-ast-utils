@@ -4,7 +4,8 @@
   "description": "",
   "dependencies": {
     "debug": "^3.1.0",
-    "jscodeshift": "^0.3.32"
+    "jscodeshift": "^0.3.32",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "autod": "^2.8.0",
@@ -25,7 +26,9 @@
     "test-local": "egg-bin test",
     "cov": "egg-bin cov",
     "ci": "npm run lint && egg-bin pkgfiles --check && npm run cov",
-    "pkgfiles": "egg-bin pkgfiles"
+    "pkgfiles": "egg-bin pkgfiles",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "ci": {
     "version": "6, 8"
@@ -42,5 +45,6 @@
     "lib"
   ],
   "author": "wanghx",
-  "license": "MIT"
+  "license": "MIT",
+  "snyk": true
 }
