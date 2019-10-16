@@ -4,8 +4,8 @@
   "description": "",
   "dependencies": {
     "debug": "^3.1.0",
-    "jscodeshift": "^0.4.0",
-    "snyk": "^1.191.0"
+    "jscodeshift": "^0.3.32",
+    "snyk": "^1.231.0"
   },
   "devDependencies": {
     "autod": "^2.8.0",
