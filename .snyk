@@ -423,3 +423,6 @@ patch:
         patched: '2019-10-04T21:38:50.045Z'
     - snyk > proxy-agent > pac-proxy-agent > https-proxy-agent:
         patched: '2019-10-04T21:38:50.045Z'
+  'npm:lodash:20180130':
+    - jscodeshift > babel-core > babel-plugin-proto-to-assign > lodash:
+        patched: '2019-10-16T09:50:58.427Z'
