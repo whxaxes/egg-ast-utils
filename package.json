@@ -4,7 +4,7 @@
   "description": "",
   "dependencies": {
     "debug": "^3.1.0",
-    "jscodeshift": "^0.3.32",
+    "jscodeshift": "^0.4.0",
     "snyk": "^1.231.0"
   },
   "devDependencies": {
